@@ -1,0 +1,837 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PopulationMapper">
+	
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into TB_POPULATION(
+			NAME,	
+			SEX,	
+			NATION,	
+			CARDID,	
+			BIRTHDAY,	
+			EDUDEGREE,	
+			POLITICAL,	
+			JOINPARTYDATE,	
+			HEALTH,	
+			ISREPRESENTATIVE,	
+			RELATIONSHIP,	
+			MERRIAGESTATUS,	
+			TEL,	
+			WORKUNIT,	
+			SALARY,	
+			HOUSEHOLDTYPE,	
+			NATIVEHABITAT,	
+			HOUSEHOLDREGISTER,	
+			ISVOLUNTEER,	
+			MILITARYSERVICE,	
+			UNITEDFRONT,	
+			SOCIALSECURITYCODE,	
+			RETIREDATE,	
+			PENSION,	
+			PARTICIPATION,	
+			INSUREDDATE,	
+			INSUREDAMOUNT,	
+			RECEIVEDATE,	
+			RECEIVEAMOUNT,	
+			MEDICALINSURANCE,	
+			MEDICALINSURANCEDATE,	
+			MEDICALINSURANCEID,	
+			MEDICALINSURANCEAMOUNT,	
+			BASICLIVING,	
+			BASICLIVINGAMOUNT,	
+			SPECIALCROWD,	
+			GRIDID,	
+			FLOORID,	
+			HOUSEID,
+			GRIDNAME,	
+			FLOORNAME,	
+			HOUSENAME,
+			CREATEDATE,	
+			CREATOR,	
+			POPULATION_ID
+		) values (
+			#{NAME},	
+			#{SEX},	
+			#{NATION},	
+			#{CARDID},	
+			#{BIRTHDAY},	
+			#{EDUDEGREE},	
+			#{POLITICAL},	
+			#{JOINPARTYDATE},	
+			#{HEALTH},	
+			#{ISREPRESENTATIVE},	
+			#{RELATIONSHIP},	
+			#{MERRIAGESTATUS},	
+			#{TEL},	
+			#{WORKUNIT},	
+			#{SALARY},	
+			#{HOUSEHOLDTYPE},	
+			#{NATIVEHABITAT},	
+			#{HOUSEHOLDREGISTER},	
+			#{ISVOLUNTEER},	
+			#{MILITARYSERVICE},	
+			#{UNITEDFRONT},	
+			#{SOCIALSECURITYCODE},	
+			#{RETIREDATE},	
+			#{PENSION},	
+			#{PARTICIPATION},	
+			#{INSUREDDATE},	
+			#{INSUREDAMOUNT},	
+			#{RECEIVEDATE},	
+			#{RECEIVEAMOUNT},	
+			#{MEDICALINSURANCE},	
+			#{MEDICALINSURANCEDATE},	
+			#{MEDICALINSURANCEID},	
+			#{MEDICALINSURANCEAMOUNT},	
+			#{BASICLIVING},	
+			#{BASICLIVINGAMOUNT},	
+			#{SPECIALCROWD},	
+			#{GRIDID},	
+			#{FLOORID},	
+			#{HOUSEID},	
+			#{GRIDNAME},	
+			#{FLOORNAME},	
+			#{HOUSENAME},
+			#{CREATEDATE},	
+			#{CREATOR},
+			#{POPULATION_ID}
+		)
+	</insert>
+	
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from TB_POPULATION
+		where 
+			POPULATION_ID = #{POPULATION_ID}
+	</delete>
+	
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update  TB_POPULATION
+			set 
+				NAME = #{NAME},
+				SEX = #{SEX},
+				NATION = #{NATION},
+				CARDID = #{CARDID},
+				BIRTHDAY = #{BIRTHDAY},
+				EDUDEGREE = #{EDUDEGREE},
+				POLITICAL = #{POLITICAL},
+				JOINPARTYDATE = #{JOINPARTYDATE},
+				HEALTH = #{HEALTH},
+				ISREPRESENTATIVE = #{ISREPRESENTATIVE},
+				RELATIONSHIP = #{RELATIONSHIP},
+				MERRIAGESTATUS = #{MERRIAGESTATUS},
+				TEL = #{TEL},
+				WORKUNIT = #{WORKUNIT},
+				SALARY = #{SALARY},
+				HOUSEHOLDTYPE = #{HOUSEHOLDTYPE},
+				NATIVEHABITAT = #{NATIVEHABITAT},
+				HOUSEHOLDREGISTER = #{HOUSEHOLDREGISTER},
+				ISVOLUNTEER = #{ISVOLUNTEER},
+				MILITARYSERVICE = #{MILITARYSERVICE},
+				UNITEDFRONT = #{UNITEDFRONT},
+				SOCIALSECURITYCODE = #{SOCIALSECURITYCODE},
+				RETIREDATE = #{RETIREDATE},
+				PENSION = #{PENSION},
+				PARTICIPATION = #{PARTICIPATION},
+				INSUREDDATE = #{INSUREDDATE},
+				INSUREDAMOUNT = #{INSUREDAMOUNT},
+				RECEIVEDATE = #{RECEIVEDATE},
+				RECEIVEAMOUNT = #{RECEIVEAMOUNT},
+				MEDICALINSURANCE = #{MEDICALINSURANCE},
+				MEDICALINSURANCEDATE = #{MEDICALINSURANCEDATE},
+				MEDICALINSURANCEID = #{MEDICALINSURANCEID},
+				MEDICALINSURANCEAMOUNT = #{MEDICALINSURANCEAMOUNT},
+				BASICLIVING = #{BASICLIVING},
+				BASICLIVINGAMOUNT = #{BASICLIVINGAMOUNT},
+				SPECIALCROWD = #{SPECIALCROWD},
+				GRIDID = #{GRIDID},
+				FLOORID = #{FLOORID},
+				HOUSEID = #{HOUSEID},
+				GRIDNAME = #{GRIDNAME},
+				FLOORNAME = #{FLOORNAME},
+				HOUSENAME = #{HOUSENAME},
+			POPULATION_ID = POPULATION_ID
+			where 
+				POPULATION_ID = #{POPULATION_ID}
+	</update>
+	
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+			NAME,	
+			SEX,	
+			NATION,	
+			CARDID,	
+			BIRTHDAY,	
+			EDUDEGREE,	
+			POLITICAL,	
+			JOINPARTYDATE,	
+			HEALTH,	
+			ISREPRESENTATIVE,	
+			RELATIONSHIP,	
+			MERRIAGESTATUS,	
+			TEL,	
+			WORKUNIT,	
+			SALARY,	
+			HOUSEHOLDTYPE,	
+			NATIVEHABITAT,	
+			HOUSEHOLDREGISTER,	
+			ISVOLUNTEER,	
+			MILITARYSERVICE,	
+			UNITEDFRONT,	
+			SOCIALSECURITYCODE,	
+			RETIREDATE,	
+			PENSION,	
+			PARTICIPATION,	
+			INSUREDDATE,	
+			INSUREDAMOUNT,	
+			RECEIVEDATE,	
+			RECEIVEAMOUNT,	
+			MEDICALINSURANCE,	
+			MEDICALINSURANCEDATE,	
+			MEDICALINSURANCEID,	
+			MEDICALINSURANCEAMOUNT,	
+			BASICLIVING,	
+			BASICLIVINGAMOUNT,	
+			SPECIALCROWD,	
+			GRIDID,	
+			FLOORID,	
+			HOUSEID,
+			GRIDNAME,	
+			FLOORNAME,	
+			HOUSENAME,	
+			POPULATION_ID
+		from 
+			TB_POPULATION
+		where 
+			POPULATION_ID = #{POPULATION_ID}
+	</select>
+	
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+				a.NAME,	
+				a.SEX,	
+				a.NATION,	
+				a.CARDID,	
+				a.BIRTHDAY,	
+				a.EDUDEGREE,	
+				a.POLITICAL,	
+				a.JOINPARTYDATE,	
+				a.HEALTH,	
+				a.ISREPRESENTATIVE,	
+				a.RELATIONSHIP,	
+				a.MERRIAGESTATUS,	
+				a.TEL,	
+				a.WORKUNIT,	
+				a.SALARY,	
+				a.HOUSEHOLDTYPE,	
+				a.NATIVEHABITAT,	
+				a.HOUSEHOLDREGISTER,	
+				a.ISVOLUNTEER,	
+				a.MILITARYSERVICE,	
+				a.UNITEDFRONT,	
+				a.SOCIALSECURITYCODE,	
+				a.RETIREDATE,	
+				a.PENSION,	
+				a.PARTICIPATION,	
+				a.INSUREDDATE,	
+				a.INSUREDAMOUNT,	
+				a.RECEIVEDATE,	
+				a.RECEIVEAMOUNT,	
+				a.MEDICALINSURANCE,	
+				a.MEDICALINSURANCEDATE,	
+				a.MEDICALINSURANCEID,	
+				a.MEDICALINSURANCEAMOUNT,	
+				a.BASICLIVING,	
+				a.BASICLIVINGAMOUNT,	
+				a.SPECIALCROWD,	
+				a.GRIDID,	
+				a.FLOORID,	
+				a.HOUSEID,	
+				a.GRIDNAME,	
+				a.FLOORNAME,	
+				a.HOUSENAME,	
+				a.POPULATION_ID
+		from 
+				TB_POPULATION a
+		where 1=1
+		<if test="pd.HOUSEID != '' and pd.HOUSEID != null">
+		and HOUSEID= #{pd.HOUSEID}
+		</if>
+		<if test="pd.FLOORID != '' and pd.FLOORID != null">
+		and FLOORID= #{pd.FLOORID}
+		</if>
+		<if test="pd.GRIDID != '' and pd.GRIDID != null">
+		and GRIDID= #{pd.GRIDID}
+		</if>
+		<if test="pd.KEYWORD != '' and pd.KEYWORD != null">
+	  	and
+				(
+					 a.GRIDNAME LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or 
+					 a.FLOORNAME LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%') 
+					 or
+					 a.HOUSENAME LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.NAME LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.SEX LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.NATION LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.CARDID LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.BIRTHDAY LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					or
+					 a.EDUDEGREE LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.POLITICAL LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.JOINPARTYDATE LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					or
+					 a.HEALTH LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.ISREPRESENTATIVE LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.RELATIONSHIP LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+				or
+					 a.MERRIAGESTATUS LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.TEL LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.WORKUNIT LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+				or
+					 a.SALARY LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.HOUSEHOLDTYPE LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.NATIVEHABITAT LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+	            or
+					 a.HOUSEHOLDREGISTER LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.ISVOLUNTEER LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.MILITARYSERVICE LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+				or
+					 a.UNITEDFRONT LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.SOCIALSECURITYCODE LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.RETIREDATE LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+				or
+					 a.PENSION LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.PARTICIPATION LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.INSUREDDATE LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+				or
+					 a.INSUREDAMOUNT LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.RECEIVEDATE LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.RECEIVEAMOUNT LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')	
+				or
+					 a.MEDICALINSURANCE LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.MEDICALINSURANCEDATE LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.MEDICALINSURANCEID LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+				or
+					 a.MEDICALINSURANCEAMOUNT LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.BASICLIVING LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.BASICLIVINGAMOUNT LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')	
+					or
+					 a.SPECIALCROWD LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+				)
+		</if>
+	</select>
+	
+	<!-- 列表 -->
+	<select id="dataMemberlistPage" parameterType="page" resultType="pd">
+		select
+				a.NAME,	
+				a.SEX,	
+				a.NATION,	
+				a.CARDID,	
+				a.BIRTHDAY,	
+				a.EDUDEGREE,	
+				a.POLITICAL,	
+				a.JOINPARTYDATE,	
+				a.HEALTH,	
+				a.ISREPRESENTATIVE,	
+				a.RELATIONSHIP,	
+				a.MERRIAGESTATUS,	
+				a.TEL,	
+				a.WORKUNIT,	
+				a.SALARY,	
+				a.HOUSEHOLDTYPE,	
+				a.NATIVEHABITAT,	
+				a.HOUSEHOLDREGISTER,	
+				a.ISVOLUNTEER,	
+				a.MILITARYSERVICE,	
+				a.UNITEDFRONT,	
+				a.SOCIALSECURITYCODE,	
+				a.RETIREDATE,	
+				a.PENSION,	
+				a.PARTICIPATION,	
+				a.INSUREDDATE,	
+				a.INSUREDAMOUNT,	
+				a.RECEIVEDATE,	
+				a.RECEIVEAMOUNT,	
+				a.MEDICALINSURANCE,	
+				a.MEDICALINSURANCEDATE,	
+				a.MEDICALINSURANCEID,	
+				a.MEDICALINSURANCEAMOUNT,	
+				a.BASICLIVING,	
+				a.BASICLIVINGAMOUNT,	
+				a.SPECIALCROWD,	
+				a.GRIDID,	
+				a.FLOORID,	
+				a.HOUSEID,	
+				a.GRIDNAME,	
+				a.FLOORNAME,	
+				a.HOUSENAME,	
+				a.POPULATION_ID
+		from 
+				TB_POPULATION a
+		where a.POLITICAL = "党员"
+		<if test="pd.HOUSEID != '' and pd.HOUSEID != null">
+		and HOUSEID= #{pd.HOUSEID}
+		</if>
+		<if test="pd.FLOORID != '' and pd.FLOORID != null">
+		and FLOORID= #{pd.FLOORID}
+		</if>
+		<if test="pd.GRIDID != '' and pd.GRIDID != null">
+		and GRIDID= #{pd.GRIDID}
+		</if>
+		<if test="pd.KEYWORD != '' and pd.KEYWORD != null">
+	  	and
+				(
+					 a.GRIDNAME LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or 
+					 a.FLOORNAME LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%') 
+					 or
+					 a.HOUSENAME LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.NAME LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.SEX LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.NATION LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.CARDID LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.BIRTHDAY LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					or
+					 a.EDUDEGREE LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.JOINPARTYDATE LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					or
+					 a.HEALTH LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.ISREPRESENTATIVE LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.RELATIONSHIP LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+				or
+					 a.MERRIAGESTATUS LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.TEL LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.WORKUNIT LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+				or
+					 a.SALARY LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.HOUSEHOLDTYPE LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.NATIVEHABITAT LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+	            or
+					 a.HOUSEHOLDREGISTER LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.ISVOLUNTEER LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.MILITARYSERVICE LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+				or
+					 a.UNITEDFRONT LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.SOCIALSECURITYCODE LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.RETIREDATE LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+				or
+					 a.PENSION LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.PARTICIPATION LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.INSUREDDATE LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+				or
+					 a.INSUREDAMOUNT LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.RECEIVEDATE LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.RECEIVEAMOUNT LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')	
+				or
+					 a.MEDICALINSURANCE LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.MEDICALINSURANCEDATE LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.MEDICALINSURANCEID LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+				or
+					 a.MEDICALINSURANCEAMOUNT LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.BASICLIVING LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.BASICLIVINGAMOUNT LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')	
+					or
+					 a.SPECIALCROWD LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+				)
+		</if>
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+				a.NAME,	
+				a.SEX,	
+				a.NATION,	
+				a.CARDID,	
+				a.BIRTHDAY,	
+				a.EDUDEGREE,	
+				a.POLITICAL,	
+				a.JOINPARTYDATE,	
+				a.HEALTH,	
+				a.ISREPRESENTATIVE,	
+				a.RELATIONSHIP,	
+				a.MERRIAGESTATUS,	
+				a.TEL,	
+				a.WORKUNIT,	
+				a.SALARY,	
+				a.HOUSEHOLDTYPE,	
+				a.NATIVEHABITAT,	
+				a.HOUSEHOLDREGISTER,	
+				a.ISVOLUNTEER,	
+				a.MILITARYSERVICE,	
+				a.UNITEDFRONT,	
+				a.SOCIALSECURITYCODE,	
+				a.RETIREDATE,	
+				a.PENSION,	
+				a.PARTICIPATION,	
+				a.INSUREDDATE,	
+				a.INSUREDAMOUNT,	
+				a.RECEIVEDATE,	
+				a.RECEIVEAMOUNT,	
+				a.MEDICALINSURANCE,	
+				a.MEDICALINSURANCEDATE,	
+				a.MEDICALINSURANCEID,	
+				a.MEDICALINSURANCEAMOUNT,	
+				a.BASICLIVING,	
+				a.BASICLIVINGAMOUNT,	
+				a.SPECIALCROWD,	
+				b.GRIDNAME,	
+				a.FLOORNAME,	
+				a.HOUSENAME,	
+				a.POPULATION_ID
+		from 
+				TB_POPULATION a
+		left join TB_SQMANAGER b
+		on a.GRIDID= b.SQMANAGER_ID
+		where 1=1
+		<if test="HOUSEID != '' and HOUSEID != null">
+		and HOUSEID= #{HOUSEID}
+		</if>
+		<if test="FLOORID != '' and FLOORID != null">
+		and FLOORID= #{FLOORID}
+		</if>
+		<if test="GRIDID != '' and GRIDID != null">
+		and GRIDID= #{GRIDID}
+		</if>
+		<if test="KEYWORD != '' and KEYWORD != null">
+	  	and
+				(
+					 a.GRIDNAME LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or 
+					 a.FLOORNAME LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%') 
+					 or
+					 a.HOUSENAME LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.NAME LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.SEX LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.NATION LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.CARDID LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.BIRTHDAY LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					or
+					 a.EDUDEGREE LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.POLITICAL LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.JOINPARTYDATE LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					or
+					 a.HEALTH LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.ISREPRESENTATIVE LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.RELATIONSHIP LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+				or
+					 a.MERRIAGESTATUS LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.TEL LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.WORKUNIT LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+				or
+					 a.SALARY LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.HOUSEHOLDTYPE LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.NATIVEHABITAT LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+	            or
+					 a.HOUSEHOLDREGISTER LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.ISVOLUNTEER LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.MILITARYSERVICE LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+				or
+					 a.UNITEDFRONT LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.SOCIALSECURITYCODE LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.RETIREDATE LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+				or
+					 a.PENSION LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.PARTICIPATION LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.INSUREDDATE LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+				or
+					 a.INSUREDAMOUNT LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.RECEIVEDATE LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.RECEIVEAMOUNT LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')	
+				or
+					 a.MEDICALINSURANCE LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.MEDICALINSURANCEDATE LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.MEDICALINSURANCEID LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+				or
+					 a.MEDICALINSURANCEAMOUNT LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.BASICLIVING LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.BASICLIVINGAMOUNT LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')	
+					or
+					 a.SPECIALCROWD LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+				)
+		</if>
+	</select>
+	
+	
+	<!-- 列表(全部) -->
+	<select id="listAllMember" parameterType="pd" resultType="pd">
+		select
+				a.NAME,	
+				a.SEX,	
+				a.NATION,	
+				a.CARDID,	
+				a.BIRTHDAY,	
+				a.EDUDEGREE,	
+				a.POLITICAL,	
+				a.JOINPARTYDATE,	
+				a.HEALTH,	
+				a.ISREPRESENTATIVE,	
+				a.RELATIONSHIP,	
+				a.MERRIAGESTATUS,	
+				a.TEL,	
+				a.WORKUNIT,	
+				a.SALARY,	
+				a.HOUSEHOLDTYPE,	
+				a.NATIVEHABITAT,	
+				a.HOUSEHOLDREGISTER,	
+				a.ISVOLUNTEER,	
+				a.MILITARYSERVICE,	
+				a.UNITEDFRONT,	
+				a.SOCIALSECURITYCODE,	
+				a.RETIREDATE,	
+				a.PENSION,	
+				a.PARTICIPATION,	
+				a.INSUREDDATE,	
+				a.INSUREDAMOUNT,	
+				a.RECEIVEDATE,	
+				a.RECEIVEAMOUNT,	
+				a.MEDICALINSURANCE,	
+				a.MEDICALINSURANCEDATE,	
+				a.MEDICALINSURANCEID,	
+				a.MEDICALINSURANCEAMOUNT,	
+				a.BASICLIVING,	
+				a.BASICLIVINGAMOUNT,	
+				a.SPECIALCROWD,	
+				b.GRIDNAME,	
+				a.FLOORNAME,	
+				a.HOUSENAME,	
+				a.POPULATION_ID
+		from 
+				TB_POPULATION a
+		left join TB_SQMANAGER b
+		on a.GRIDID= b.SQMANAGER_ID
+		where a.POLITICAL = "党员"
+		<if test="HOUSEID != '' and HOUSEID != null">
+		and HOUSEID= #{HOUSEID}
+		</if>
+		<if test="FLOORID != '' and FLOORID != null">
+		and FLOORID= #{FLOORID}
+		</if>
+		<if test="GRIDID != '' and GRIDID != null">
+		and GRIDID= #{GRIDID}
+		</if>
+		<if test="KEYWORD != '' and KEYWORD != null">
+	  	and
+				(
+					 a.GRIDNAME LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or 
+					 a.FLOORNAME LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%') 
+					 or
+					 a.HOUSENAME LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.NAME LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.SEX LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.NATION LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.CARDID LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.BIRTHDAY LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					or
+					 a.EDUDEGREE LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.POLITICAL LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.JOINPARTYDATE LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					or
+					 a.HEALTH LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.ISREPRESENTATIVE LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.RELATIONSHIP LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+				or
+					 a.MERRIAGESTATUS LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.TEL LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.WORKUNIT LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+				or
+					 a.SALARY LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.HOUSEHOLDTYPE LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.NATIVEHABITAT LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+	            or
+					 a.HOUSEHOLDREGISTER LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.ISVOLUNTEER LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.MILITARYSERVICE LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+				or
+					 a.UNITEDFRONT LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.SOCIALSECURITYCODE LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.RETIREDATE LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+				or
+					 a.PENSION LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.PARTICIPATION LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.INSUREDDATE LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+				or
+					 a.INSUREDAMOUNT LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.RECEIVEDATE LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.RECEIVEAMOUNT LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')	
+				or
+					 a.MEDICALINSURANCE LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.MEDICALINSURANCEDATE LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.MEDICALINSURANCEID LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+				or
+					 a.MEDICALINSURANCEAMOUNT LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.BASICLIVING LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.BASICLIVINGAMOUNT LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')	
+					or
+					 a.SPECIALCROWD LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+				)
+		</if>
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from TB_POPULATION
+		where 
+			POPULATION_ID in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	
+	    <!--  按性别进行汇总 -->
+	<select id="StatisticalSummarySex" parameterType="pd" resultType="pd">
+		select 
+				a.SEX,
+				COUNT(*) as sum
+		from 
+				TB_POPULATION a
+	    GROUP BY 
+	            a.SEX
+	</select> 
+	
+		<!--  按年龄进行汇总 -->
+	<select id="StatisticalSummaryOld" parameterType="pd" resultType="pd">
+		select nnd as 'old',count(*) as 'sum' from(  
+        select   
+ 		case  
+ 			 when (year(now())-year(birthday)-1) + ( DATE_FORMAT(birthday, '%m%d') &lt;= DATE_FORMAT(NOW(), '%m%d') )&lt;18 then '18以下'  
+  		   	when (year(now())-year(birthday)-1) + ( DATE_FORMAT(birthday, '%m%d') &lt;= DATE_FORMAT(NOW(), '%m%d') )&gt;=18 and (year(now())-year(birthday)-1) + ( DATE_FORMAT(birthday, '%m%d') &lt;= DATE_FORMAT(NOW(), '%m%d') )&lt;60 then '18以上60以下'  
+ 			 when (year(now())-year(birthday)-1) + ( DATE_FORMAT(birthday, '%m%d') &lt;= DATE_FORMAT(NOW(), '%m%d') )&gt;=60 then '60以上'   
+ 		end   
+			 as nnd from tb_population
+			)a group by nnd;
+	</select> 
+	
+		<!--  按文化程度进行汇总 -->
+	<select id="StatisticalSummaryEducation" parameterType="pd" resultType="pd">
+		select 
+				a.EDUDEGREE,
+				COUNT(*) as sum
+		from 
+				TB_POPULATION a
+	    GROUP BY 
+	            a.EDUDEGREE
+	</select>
+	
+	<!--  按政治面貌进行汇总 -->
+	<select id="StatisticalSummaryPolicy" parameterType="pd" resultType="pd">
+		select 
+				a.POLITICAL,
+				COUNT(*) as sum
+		from 
+				TB_POPULATION a
+	    GROUP BY 
+	            a.POLITICAL
+	</select>
+</mapper>

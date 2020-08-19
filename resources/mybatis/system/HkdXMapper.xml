@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<!-- 映射关联 -->
+<mapper namespace="HkdXMapper">
+	
+    <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>  
+	
+	<!-- 换皮肤-->
+	<update id="setSKIN" parameterType="pd" flushCache="false">
+		update SYS_HKD set 
+		SKIN = #{SKIN} 
+		where HKDNAME = #{HKDNAME}
+	</update>
+	
+	<!-- 更新登录时间 -->
+	<update id="updateLastLogin" parameterType="pd" flushCache="false">
+		update SYS_HKD set 
+		LAST_LOGIN = #{LAST_LOGIN} 
+		where HKD_ID = #{HKD_ID}
+	</update>
+	
+	<!-- 判断用户名和密码 -->
+	<select id="getHkdInfo" parameterType="pd" resultType="pd" useCache="false"><!-- insert update delete (flushCache="true/false") -->
+		select * from SYS_HKD 
+		where 1=1
+		<if test="HKDNAME != null and PASSWORD != null">
+	  	and	(
+	  		(HKDNAME = #{HKDNAME} and PASSWORD = #{PASSWORD})
+	  		or
+	  		(EMAIL = #{HKDNAME} and PASSWORD = #{PASSWORD})
+	  		or
+	  		(NUMBER = #{HKDNAME} and PASSWORD = #{PASSWORD})
+	  		)
+		</if>
+		<if test="HKD_ID != null and HKD_ID != ''">
+		and HKD_ID = #{HKD_ID}
+		</if>
+	</select>
+	
+
+	
+	<!-- 存入IP -->
+	<update id="saveIP" parameterType="pd" flushCache="false">
+		update SYS_HKD 
+			set 
+				IP = #{IP}
+			where 
+				HKDNAME = #{HKDNAME}
+	</update>
+	
+	<!-- 修改 -->
+	<update id="editU" parameterType="pd" flushCache="false">
+		update  SYS_HKD
+			set HKDNAME				= #{HKDNAME},
+				NAME 					= #{NAME},
+				ROLE_ID 				= #{ROLE_ID},
+				BZ						= #{BZ},
+				EMAIL					= #{EMAIL},
+				NUMBER					= #{NUMBER},
+				PHONE					= #{PHONE}
+			<if test="PASSWORD != null and PASSWORD != ''">
+				,PASSWORD				= #{PASSWORD}
+			</if>
+			where 
+				HKD_ID = #{HKD_ID}
+	</update>
+	
+	<!-- 通过hkd_id获取数据 -->
+	<select id="findByUiId" parameterType="pd" resultType="pd" useCache="false">
+		select 
+			HKD_ID,
+			HKDNAME,
+			PASSWORD,
+			NAME,
+			RIGHTS,
+			ROLE_ID,
+			LAST_LOGIN,
+			IP,
+			STATUS,
+			BZ,
+			SKIN,
+			EMAIL,
+			NUMBER,
+			PHONE
+		from 
+			SYS_HKD
+		where 
+			HKD_ID = #{HKD_ID}
+	</select>
+		
+	<!-- 通过邮箱获取数据 -->
+	<select id="findByUE" parameterType="pd" resultType="pd" useCache="false">
+		select 
+			HKD_ID,
+			HKDNAME,
+			PASSWORD,
+			NAME,
+			RIGHTS,
+			ROLE_ID,
+			LAST_LOGIN,
+			IP,
+			STATUS,
+			BZ,
+			SKIN,
+			EMAIL,
+			NUMBER,
+			PHONE
+		from 
+			SYS_HKD
+		where 
+			EMAIL = #{EMAIL}
+		<if test="HKDNAME != null and HKDNAME != ''">
+			and HKDNAME != #{HKDNAME} 
+		</if>
+	</select>
+	
+	<!-- 通过编号获取数据 -->
+	<select id="findByUN" parameterType="pd" resultType="pd" useCache="false">
+		select 
+			HKD_ID,
+			HKDNAME,
+			PASSWORD,
+			NAME,
+			RIGHTS,
+			ROLE_ID,
+			LAST_LOGIN,
+			IP,
+			STATUS,
+			BZ,
+			SKIN,
+			EMAIL,
+			NUMBER,
+			PHONE
+		from 
+			SYS_HKD
+		where 
+			NUMBER = #{NUMBER}
+		<if test="HKDNAME != null and HKDNAME != ''">
+			and HKDNAME != #{HKDNAME} 
+		</if>
+	</select>
+	
+	<!-- 通过HKDNAME获取数据 -->
+	<select id="findByUId" parameterType="pd" resultType="pd" useCache="false">
+		select 
+			HKD_ID,
+			HKDNAME,
+			PASSWORD,
+			NAME,
+			RIGHTS,
+			ROLE_ID,
+			LAST_LOGIN,
+			IP,
+			STATUS,
+			BZ,
+			SKIN,
+			EMAIL,
+			NUMBER,
+			PHONE
+		from 
+			SYS_HKD
+		where 
+			HKDNAME = #{HKDNAME}
+	</select>
+	
+	<!-- 新增用户 -->
+	<insert id="saveU" parameterType="pd" flushCache="false">
+		insert into SYS_HKD (
+			HKD_ID,
+			HKDNAME,
+			PASSWORD,
+			NAME,
+			RIGHTS,
+			ROLE_ID,
+			LAST_LOGIN,
+			IP,
+			STATUS,
+			BZ,
+			SKIN,
+			EMAIL,
+			NUMBER,
+			PHONE
+		) values (
+			#{HKD_ID},
+			#{HKDNAME},
+			#{PASSWORD},
+			#{NAME},
+			#{RIGHTS},
+			#{ROLE_ID},
+			#{LAST_LOGIN},
+			#{IP},
+			#{STATUS},
+			#{BZ},
+			#{SKIN},
+			#{EMAIL},
+			#{NUMBER},
+			#{PHONE}
+		)
+	</insert>
+	<!-- 用户列表(用户组) -->
+	<select id="hkdlistPage" parameterType="page" resultType="pd" useCache="false">
+		select  u.HKD_ID,
+				u.HKDNAME,
+				u.PASSWORD,
+				u.LAST_LOGIN,
+				u.NAME,
+				u.IP,
+				u.EMAIL,
+				u.NUMBER,
+				u.PHONE,
+				r.ROLE_ID,
+				r.ROLE_NAME
+		from SYS_HKD u, SYS_ROLE r 
+		where u.ROLE_ID = r.ROLE_ID 
+		and u.HKDNAME != 'admin'
+		and (r.ROLE_ID != '7' and r.PARENT_ID != '7')
+		<if test="pd.HKDNAME != null and pd.HKDNAME != ''"><!-- 关键词检索 -->
+			and
+				(
+					 u.HKDNAME LIKE CONCAT(CONCAT('%', #{pd.HKDNAME}),'%')
+					 or 
+					 u.EMAIL LIKE CONCAT(CONCAT('%', #{pd.HKDNAME}),'%') 
+					 or
+					 u.NUMBER LIKE CONCAT(CONCAT('%', #{pd.HKDNAME}),'%')
+					 or
+					 u.NAME LIKE CONCAT(CONCAT('%', #{pd.HKDNAME}),'%')
+					 or
+					 u.PHONE LIKE CONCAT(CONCAT('%', #{pd.HKDNAME}),'%')
+				)
+		</if>
+		<if test="pd.ROLE_ID != null and pd.ROLE_ID != ''"><!-- 角色检索 -->
+			and u.ROLE_ID=#{pd.ROLE_ID} 
+		</if>
+		<if test="pd.lastLoginStart!=null and pd.lastLoginStart!=''"><!-- 登录时间检索 -->
+			and u.LAST_LOGIN &gt;= #{pd.lastLoginStart} 
+		</if>
+		<if test="pd.lastLoginEnd!=null and pd.lastLoginEnd!=''"><!-- 登录时间检索 -->
+			and u.LAST_LOGIN &lt;= #{pd.lastLoginEnd} 
+		</if>
+		order by u.LAST_LOGIN desc
+	</select>
+	
+	<!-- 用户列表(全部) -->
+	<select id="listAllHkd" parameterType="pd" resultType="pd" useCache="false">
+		select  u.HKD_ID,
+				u.HKDNAME,
+				u.PASSWORD,
+				u.LAST_LOGIN,
+				u.NAME,
+				u.IP,
+				u.EMAIL,
+				u.NUMBER,
+				u.PHONE,
+				r.ROLE_ID,
+				r.ROLE_NAME
+		from SYS_HKD u, SYS_ROLE r 
+		where u.ROLE_ID = r.ROLE_ID 
+		and u.HKDNAME != 'admin'
+		and (r.ROLE_ID != '7' and r.PARENT_ID != '7')
+		<if test="HKDNAME != null and HKDNAME != ''"><!-- 关键词检索 -->
+			and
+				(
+					 u.HKDNAME LIKE CONCAT(CONCAT('%', #{HKDNAME}),'%')
+					 or 
+					 u.EMAIL LIKE CONCAT(CONCAT('%', #{HKDNAME}),'%') 
+					 or
+					 u.NUMBER LIKE CONCAT(CONCAT('%', #{HKDNAME}),'%')
+					 or
+					 u.NAME LIKE CONCAT(CONCAT('%', #{HKDNAME}),'%')
+					  or
+					 u.PHONE LIKE CONCAT(CONCAT('%', #{HKDNAME}),'%')
+				)
+		</if>
+		<if test="ROLE_ID != null and ROLE_ID != ''"><!-- 角色检索 -->
+			and u.ROLE_ID=#{ROLE_ID} 
+		</if>
+		<if test="lastLoginStart!=null and lastLoginStart!=''"><!-- 登录时间检索 -->
+			and u.LAST_LOGIN &gt;= #{lastLoginStart} 
+		</if>
+		<if test="lastLoginEnd!=null and lastLoginEnd!=''"><!-- 登录时间检索 -->
+			and u.LAST_LOGIN &lt;= #{lastLoginEnd} 
+		</if>
+		order by u.LAST_LOGIN desc
+	</select>
+	
+	<!-- 删除用户 -->
+	<delete id="deleteU" parameterType="pd" flushCache="false">
+		delete from SYS_HKD
+		where 
+			HKD_ID = #{HKD_ID}
+	</delete>
+	
+	<!-- 批量删除用户 -->
+	<delete id="deleteAllU" parameterType="String" flushCache="false">
+		delete from SYS_HKD
+		where 
+			HKD_ID in
+  			 <foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                  #{item}
+             </foreach>
+	</delete>
+	
+</mapper>

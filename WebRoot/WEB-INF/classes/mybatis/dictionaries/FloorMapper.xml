@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FloorMapper">
+	
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into TB_FLOOR(
+			FLOORNAME,	
+			GRIDID,	
+			CREATEDATE,	
+			CREATOR,
+			FLOOR_ID
+		) values (
+			#{FLOORNAME},	
+			#{GRIDID},
+			#{CREATEDATE},	
+			#{CREATOR},		
+			#{FLOOR_ID}
+		)
+	</insert>
+	
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from TB_FLOOR
+		where 
+			FLOOR_ID = #{FLOOR_ID}
+	</delete>
+	
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update  TB_FLOOR
+			set 
+				FLOORNAME = #{FLOORNAME},
+				GRIDID = #{GRIDID},
+			FLOOR_ID = FLOOR_ID
+			where 
+				FLOOR_ID = #{FLOOR_ID}
+	</update>
+	
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+			FLOORNAME,	
+			GRIDID,	
+			
+			FLOOR_ID
+		from 
+			TB_FLOOR
+		where 
+			FLOOR_ID = #{FLOOR_ID}
+	</select>
+	
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+				a.FLOORNAME,	
+				a.GRIDID,
+				b.GRIDNAME,	
+				a.FLOOR_ID
+		from 
+				TB_FLOOR a
+		left join
+		        TB_SQMANAGER b
+		on a.GRIDID= b.SQMANAGER_ID
+		where 1=1
+		<if test="pd.KEYWORD != '' and pd.KEYWORD != null">
+	  	and
+				(
+					 a.FLOORNAME LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or 
+					 b.GRIDNAME LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%') 
+				)
+		</if>
+		order by a.createdate desc
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+				a.FLOORNAME,	
+				b.GRIDNAME
+		from 
+				TB_FLOOR a
+		left join
+		        TB_SQMANAGER b
+		on a.GRIDID= b.SQMANAGER_ID
+		where 1=1
+		<if test="KEYWORD != '' and KEYWORD != null">
+	  	and
+				(
+					 a.FLOORNAME LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or 
+					 b.GRIDNAME LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%') 
+				)
+		</if>
+	    order by a.createdate desc
+	</select>
+	
+		<!-- 新增、编辑人口信息下拉框使用 -->
+	<select id="listAllInfo" parameterType="pd" resultType="pd">
+		select
+				a.FLOORNAME,	
+				a.FLOOR_ID,	
+				a.GRIDID	
+		from 
+				TB_FLOOR a
+		left join
+		        TB_SQMANAGER b
+		on a.GRIDID= b.SQMANAGER_ID
+		where
+		     a.GRIDID = #{GRIDID}
+	</select>
+	
+		<!-- 列表(全部) -->
+	<select id="nameList" parameterType="pd" resultType="pd">
+		select
+				a.FLOORNAME as NAME,	
+				a.FLOOR_ID as ID
+		from 
+				TB_FLOOR a
+	</select>
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from TB_FLOOR
+		where 
+			FLOOR_ID in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	
+</mapper>

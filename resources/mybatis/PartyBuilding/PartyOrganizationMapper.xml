@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PartyOrganizationMapper">
+	
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into TB_PARTYORGANIZATION(
+			ORGANIZATIONNAME,	
+			ORGANIZATION,	
+			FOUNDINGTIME,	
+			CHANGETIME,	
+			BRIEFINTRODUCTION,	
+			CURRENTLYUSERS,	
+			PARTYORGANIZATION_ID
+		) values (
+			#{ORGANIZATIONNAME},	
+			#{ORGANIZATION},	
+			#{FOUNDINGTIME},	
+			#{CHANGETIME},	
+			#{BRIEFINTRODUCTION},	
+			#{CURRENTLYUSERS},	
+			#{PARTYORGANIZATION_ID}
+		)
+	</insert>
+	
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from TB_PARTYORGANIZATION
+		where 
+			PARTYORGANIZATION_ID = #{PARTYORGANIZATION_ID}
+	</delete>
+	
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update  TB_PARTYORGANIZATION
+			set 
+				ORGANIZATIONNAME = #{ORGANIZATIONNAME},
+				ORGANIZATION = #{ORGANIZATION},
+				FOUNDINGTIME = #{FOUNDINGTIME},
+				CHANGETIME = #{CHANGETIME},
+				BRIEFINTRODUCTION = #{BRIEFINTRODUCTION},
+			PARTYORGANIZATION_ID = PARTYORGANIZATION_ID
+			where 
+				PARTYORGANIZATION_ID = #{PARTYORGANIZATION_ID}
+	</update>
+	
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+			ORGANIZATIONNAME,	
+			ORGANIZATION,	
+			FOUNDINGTIME,	
+			CHANGETIME,	
+			BRIEFINTRODUCTION,	
+			CURRENTLYUSERS,	
+			SUBMISSIONTIME,	
+			PARTYORGANIZATION_ID
+		from 
+			TB_PARTYORGANIZATION
+		where 
+			PARTYORGANIZATION_ID = #{PARTYORGANIZATION_ID}
+	</select>
+	
+		<!-- 通过ID获取党组织信息 -->
+	<select id="findByPdId" parameterType="pd" resultType="string">
+		select 
+			BRIEFINTRODUCTION
+		from 
+			TB_PARTYORGANIZATION
+		where 
+			PARTYORGANIZATION_ID = #{PARTYORGANIZATION_ID}
+	</select>
+	
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+				a.ORGANIZATIONNAME,	
+				a.ORGANIZATION,	
+				a.FOUNDINGTIME,	
+				a.CHANGETIME,	
+				a.BRIEFINTRODUCTION,	
+				a.CURRENTLYUSERS,	
+				a.SUBMISSIONTIME,	
+				a.PARTYORGANIZATION_ID
+		from 
+				TB_PARTYORGANIZATION a
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+				a.ORGANIZATIONNAME,	
+				a.ORGANIZATION,	
+				a.FOUNDINGTIME,	
+				a.CHANGETIME,	
+				a.BRIEFINTRODUCTION,	
+				a.CURRENTLYUSERS,	
+				a.SUBMISSIONTIME,	
+				a.PARTYORGANIZATION_ID
+		from 
+				TB_PARTYORGANIZATION a
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from TB_PARTYORGANIZATION
+		where 
+			PARTYORGANIZATION_ID in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	
+	<!-- 根据党组织姓名进行模糊查询 -->
+		<select id="NameSelectMapper" parameterType="string" resultType="pd">
+		select 
+			a.ORGANIZATIONNAME,	
+			a.ORGANIZATION,	
+			a.FOUNDINGTIME,	
+			a.CHANGETIME,	
+			a.BRIEFINTRODUCTION,	
+			a.CURRENTLYUSERS,	
+			a.SUBMISSIONTIME,	
+			a.PARTYORGANIZATION_ID
+		from 
+			TB_PARTYORGANIZATION a
+		where 
+			a.ORGANIZATIONNAME like CONCAT('%','${value}','%' )
+	</select>
+</mapper>

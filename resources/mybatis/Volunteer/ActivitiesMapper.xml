@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ActivitiesMapper">
+	
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into TB_ACTIVITIES(
+			TEAMNAME,	
+			ACTIVITIESNAME,	
+			ACTIVITIES_ID
+		) values (
+			#{TEAMNAME},	
+			#{ACTIVITIESNAME},	
+			#{ACTIVITIES_ID}
+		)
+	</insert>
+	
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from TB_ACTIVITIES
+		where 
+			ACTIVITIES_ID = #{ACTIVITIES_ID}
+	</delete>
+	
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update  TB_ACTIVITIES
+			set 
+				TEAMNAME = #{TEAMNAME},
+				ACTIVITIESNAME = #{ACTIVITIESNAME},
+			ACTIVITIES_ID = ACTIVITIES_ID
+			where 
+				ACTIVITIES_ID = #{ACTIVITIES_ID}
+	</update>
+	
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+			TEAMNAME,	
+			ACTIVITIESNAME,	
+			ACTIVITIES_ID
+		from 
+			TB_ACTIVITIES
+		where 
+			ACTIVITIES_ID = #{ACTIVITIES_ID}
+	</select>
+	
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+				a.TEAMNAME,	
+				a.ACTIVITIESNAME,	
+				a.ACTIVITIES_ID
+		from 
+				TB_ACTIVITIES a
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+				a.TEAMNAME,	
+				a.ACTIVITIESNAME,	
+				a.ACTIVITIES_ID
+		from 
+				TB_ACTIVITIES a
+	</select>
+	
+	<!-- 根据志愿者队伍进行模糊查询 -->
+		<select id="VolunteerSelectMapper" parameterType="string" resultType="pd">
+	    select
+				a.TEAMNAME,	
+				a.ACTIVITIESNAME,	
+				a.ACTIVITIES_ID
+		from 
+				TB_ACTIVITIES a
+		where 
+			a.TEAMNAME like CONCAT('%','${value}','%' )
+	</select>
+	
+	<!-- 根据活动名称进行模糊查询 -->
+		<select id="ActivitiesSelectMapper" parameterType="string" resultType="pd">
+		select
+				a.TEAMNAME,	
+				a.ACTIVITIESNAME,	
+				a.ACTIVITIES_ID
+		from 
+				TB_ACTIVITIES a
+		where 
+			a.ACTIVITIESNAME like CONCAT('%','${value}','%' )
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from TB_ACTIVITIES
+		where 
+			ACTIVITIES_ID in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	
+</mapper>

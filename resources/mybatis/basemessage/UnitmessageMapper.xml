@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="UnitmessageMapper">
+	
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into TB_UNITMESSAGE(
+			GRIDID,	
+			FLOORID,	
+			UNITNAME,	
+			UNITTYPE,	
+			LEADER,	
+			TEL,	
+			REMARK,	
+			CREATEDATE,	
+			CREATOR,	
+			UNITMESSAGE_ID
+		) values (
+			#{GRIDID},	
+			#{FLOORID},	
+			#{UNITNAME},	
+			#{UNITTYPE},	
+			#{LEADER},	
+			#{TEL},	
+			#{REMARK},	
+			#{CREATEDATE},	
+			#{CREATOR},	
+			#{UNITMESSAGE_ID}
+		)
+	</insert>
+	
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from TB_UNITMESSAGE
+		where 
+			UNITMESSAGE_ID = #{UNITMESSAGE_ID}
+	</delete>
+	
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update  TB_UNITMESSAGE
+			set 
+				GRIDID = #{GRIDID},
+				FLOORID = #{FLOORID},
+				UNITNAME = #{UNITNAME},
+				UNITTYPE = #{UNITTYPE},
+				LEADER = #{LEADER},
+				TEL = #{TEL},
+				REMARK = #{REMARK},
+				CREATEDATE = #{CREATEDATE},
+			UNITMESSAGE_ID = UNITMESSAGE_ID
+			where 
+				UNITMESSAGE_ID = #{UNITMESSAGE_ID}
+	</update>
+	
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+			GRIDID,	
+			FLOORID,	
+			UNITNAME,	
+			UNITTYPE,	
+			LEADER,	
+			TEL,	
+			REMARK,	
+			CREATEDATE,	
+			CREATOR,	
+			UNITMESSAGE_ID
+		from 
+			TB_UNITMESSAGE
+		where 
+			UNITMESSAGE_ID = #{UNITMESSAGE_ID}
+	</select>
+	
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+				a.GRIDID,
+				b.GRIDNAME,	
+				a.FLOORID,
+				c.FLOORNAME,	
+				a.UNITNAME,	
+				a.UNITTYPE,	
+				a.LEADER,	
+				a.TEL,	
+				a.REMARK,	
+				a.CREATEDATE,	
+				a.CREATOR,	
+				a.UNITMESSAGE_ID
+		from 
+				TB_UNITMESSAGE a
+		left join TB_SQMANAGER b
+		on a.GRIDID= b.SQMANAGER_ID
+		left join TB_FLOOR c
+		on a.FLOORID= c.FLOOR_ID
+		where 1=1
+		<if test="pd.GRIDID != '' and pd.GRIDID != null">
+		and a.GRIDID= #{pd.GRIDID}
+		</if>
+		<if test="pd.FLOORID != '' and pd.FLOORID != null">
+		and a.FLOORID= #{pd.FLOORID}
+		</if>
+		<if test="pd.KEYWORD != '' and pd.KEYWORD != null">
+	  	and
+				(
+					 b.GRIDNAME LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or 
+					 c.FLOORNAME LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%') 
+					 or
+					 a.UNITNAME LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.UNITTYPE LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.LEADER LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+				)
+		</if>
+		order by CREATEDATE
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+				b.GRIDNAME,	
+				c.FLOORNAME,	
+				a.UNITNAME,	
+				a.UNITTYPE,	
+				a.LEADER,	
+				a.TEL,	
+				a.REMARK,	
+				a.CREATEDATE,	
+				a.CREATOR,	
+				a.UNITMESSAGE_ID
+		from 
+				TB_UNITMESSAGE a
+		left join TB_SQMANAGER b
+		on a.GRIDID= b.SQMANAGER_ID
+		left join TB_FLOOR c
+		on a.FLOORID= c.FLOOR_ID
+		where 1=1
+		<if test="GRIDID != '' and GRIDID != null">
+		and GRIDID= #{GRIDID}
+		</if>
+		<if test="FLOORID != '' and FLOORID != null">
+		and FLOORID= #{FLOORID}
+		</if>
+		<if test="KEYWORD != '' and KEYWORD != null">
+	  	and
+				(
+					 b.GRIDNAME LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or 
+					 c.FLOORNAME LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%') 
+					 or
+					 a.UNITNAME LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.UNITTYPE LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.LEADER LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+				)
+		</if>
+
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from TB_UNITMESSAGE
+		where 
+			UNITMESSAGE_ID in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	
+</mapper>

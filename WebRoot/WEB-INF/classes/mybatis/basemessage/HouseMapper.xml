@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="HouseMapper">
+	
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into TB_HOUSE(
+			GRIDID,	
+			GRIDNAME,	
+			FLOORID,	
+			FLOORNAME,
+			HOUSENAME,	
+			HOUSEHOLDER,	
+			HOUSETYPE,	
+			HOUSESTATUS,	
+			PROPERTYRIGHT,	
+			CREATEDATE,	
+			CREATOR,	
+			HOUSE_ID
+		) values (
+			#{GRIDID},	
+			#{GRIDNAME},	
+			#{FLOORID},	
+			#{FLOORNAME},
+			#{HOUSENAME},	
+			#{HOUSEHOLDER},	
+			#{HOUSETYPE},	
+			#{HOUSESTATUS},	
+			#{PROPERTYRIGHT},	
+			#{CREATEDATE},	
+			#{CREATOR},	
+			#{HOUSE_ID}
+		)
+	</insert>
+	
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from TB_HOUSE
+		where 
+			HOUSE_ID = #{HOUSE_ID}
+	</delete>
+	
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update  TB_HOUSE
+			set 
+				GRIDID = #{GRIDID},
+				FLOORID = #{FLOORID},
+				HOUSENAME=#{HOUSENAME},
+				HOUSEHOLDER = #{HOUSEHOLDER},
+				HOUSETYPE = #{HOUSETYPE},
+				HOUSESTATUS = #{HOUSESTATUS},
+				PROPERTYRIGHT = #{PROPERTYRIGHT},
+			HOUSE_ID = HOUSE_ID
+			where 
+				HOUSE_ID = #{HOUSE_ID}
+	</update>
+	
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+			GRIDID,	
+			GRIDNAME,	
+			FLOORID,	
+			FLOORNAME,
+			HOUSENAME,	
+			HOUSEHOLDER,	
+			HOUSETYPE,	
+			HOUSESTATUS,	
+			PROPERTYRIGHT,	
+			CREATEDATE,	
+			CREATOR,	
+			HOUSE_ID
+		from 
+			TB_HOUSE
+		where 
+			HOUSE_ID = #{HOUSE_ID}
+	</select>
+	
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+				a.GRIDID,	
+				b.GRIDNAME,	
+				a.FLOORID,
+				a.HOUSENAME,	
+				c.FLOORNAME,	
+				a.HOUSEHOLDER,	
+				a.HOUSETYPE,	
+				a.HOUSESTATUS,	
+				a.PROPERTYRIGHT,	
+				a.CREATEDATE,	
+				a.CREATOR,	
+				a.HOUSE_ID
+		from 
+				TB_HOUSE a
+		left join TB_SQMANAGER b
+		on a.GRIDID= b.SQMANAGER_ID
+		left join TB_FLOOR c
+		on a.FLOORID= c.FLOOR_ID
+		where 1=1
+		<if test="pd.GRIDID != '' and pd.GRIDID != null">
+		and a.GRIDID= #{pd.GRIDID}
+		</if>
+		<if test="pd.FLOORID != '' and pd.FLOORID != null">
+		and a.FLOORID= #{pd.FLOORID}
+		</if>
+		<if test="pd.KEYWORD != '' and pd.KEYWORD != null">
+	  	and
+				(
+					 b.GRIDNAME LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or 
+					 c.FLOORNAME LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%') 
+					 or
+					 a.HOUSENAME LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.HOUSEHOLDER LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.HOUSETYPE LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.HOUSESTATUS LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+					 or
+					 a.PROPERTYRIGHT LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+				)
+		</if>
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+				a.GRIDID,	
+				b.GRIDNAME,	
+				a.HOUSENAME,	
+				a.FLOORID,	
+				c.FLOORNAME,	
+				a.HOUSEHOLDER,	
+				a.HOUSETYPE,	
+				a.HOUSESTATUS,	
+				a.PROPERTYRIGHT,	
+				a.CREATEDATE,	
+				a.CREATOR,	
+				a.HOUSE_ID
+		from 
+				TB_HOUSE a
+		left join TB_SQMANAGER b
+		on a.GRIDID= b.SQMANAGER_ID
+		left join TB_FLOOR c
+		on a.FLOORID= c.FLOOR_ID
+		where 1=1
+		<if test="GRIDID != '' and GRIDID != null">
+		and a.GRIDID= #{GRIDID}
+		</if>
+		<if test="FLOORID != '' and FLOORID != null">
+		and a.FLOORID= #{FLOORID}
+		</if>
+		<if test="KEYWORD != '' and KEYWORD != null">
+	  	and
+				(
+					 b.GRIDNAME LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or 
+					 c.FLOORNAME LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%') 
+					 or
+					 a.HOUSENAME LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.HOUSEHOLDER LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.HOUSETYPE LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.HOUSESTATUS LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+					 or
+					 a.PROPERTYRIGHT LIKE CONCAT(CONCAT('%', #{KEYWORD}),'%')
+				)
+		</if>
+	</select>
+		
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from TB_HOUSE
+		where 
+			HOUSE_ID in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	
+</mapper>

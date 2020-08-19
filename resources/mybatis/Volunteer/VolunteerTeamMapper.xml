@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="VolunteerTeamMapper">
+	
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into TB_VOLUNTEERTEAM(
+			TEAMNAME,	
+			TEAMCHARGER,	
+			FOUNDINGTIME,	
+			HEADCOUNT,	
+			MEMBERCOMPOSITION,	
+			CURRENTLYUSERS,	
+			SUBMISSIONTIME,	
+			VOLUNTEERTEAM_ID
+		) values (
+			#{TEAMNAME},	
+			#{TEAMCHARGER},	
+			#{FOUNDINGTIME},	
+			#{HEADCOUNT},	
+			#{MEMBERCOMPOSITION},	
+			#{CURRENTLYUSERS},	
+			#{SUBMISSIONTIME},	
+			#{VOLUNTEERTEAM_ID}
+		)
+	</insert>
+	
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from TB_VOLUNTEERTEAM
+		where 
+			VOLUNTEERTEAM_ID = #{VOLUNTEERTEAM_ID}
+	</delete>
+	
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update  TB_VOLUNTEERTEAM
+			set 
+				TEAMNAME = #{TEAMNAME},
+				TEAMCHARGER = #{TEAMCHARGER},
+				FOUNDINGTIME = #{FOUNDINGTIME},
+				HEADCOUNT = #{HEADCOUNT},
+				MEMBERCOMPOSITION = #{MEMBERCOMPOSITION},
+				CURRENTLYUSERS = #{CURRENTLYUSERS},
+			VOLUNTEERTEAM_ID = VOLUNTEERTEAM_ID
+			where 
+				VOLUNTEERTEAM_ID = #{VOLUNTEERTEAM_ID}
+	</update>
+	
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+			TEAMNAME,	
+			TEAMCHARGER,	
+			FOUNDINGTIME,	
+			HEADCOUNT,	
+			MEMBERCOMPOSITION,	
+			CURRENTLYUSERS,	
+			SUBMISSIONTIME,	
+			VOLUNTEERTEAM_ID
+		from 
+			TB_VOLUNTEERTEAM
+		where 
+			VOLUNTEERTEAM_ID = #{VOLUNTEERTEAM_ID}
+	</select>
+	
+	<!-- 通过ID获取成员构成 -->
+	<select id="findByPdId" parameterType="pd" resultType="string">
+		select 
+			MEMBERCOMPOSITION
+		from 
+			TB_VOLUNTEERTEAM
+		where 
+			VOLUNTEERTEAM_ID = #{VOLUNTEERTEAM_ID}
+	</select>
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+				a.TEAMNAME,	
+				a.TEAMCHARGER,	
+				a.FOUNDINGTIME,	
+				a.HEADCOUNT,	
+				a.MEMBERCOMPOSITION,	
+				a.CURRENTLYUSERS,	
+				a.SUBMISSIONTIME,	
+				a.VOLUNTEERTEAM_ID
+		from 
+				TB_VOLUNTEERTEAM a
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+				a.TEAMNAME,	
+				a.TEAMCHARGER,	
+				a.FOUNDINGTIME,	
+				a.HEADCOUNT,	
+				a.MEMBERCOMPOSITION,	
+				a.CURRENTLYUSERS,	
+				a.SUBMISSIONTIME,	
+				a.VOLUNTEERTEAM_ID
+		from 
+				TB_VOLUNTEERTEAM a
+	</select>
+	
+	<!-- 队伍名称列表(全部) -->
+	<select id="listAllInfo" parameterType="pd" resultType="pd">
+		select
+				a.TEAMNAME
+		from 
+				TB_VOLUNTEERTEAM a
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from TB_VOLUNTEERTEAM
+		where 
+			VOLUNTEERTEAM_ID in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	
+	<!-- 根据队伍名称进行模糊查询 -->
+		<select id="NameSelectMapper" parameterType="string" resultType="pd">
+		select 
+			    a.TEAMNAME,	
+				a.TEAMCHARGER,	
+				a.FOUNDINGTIME,	
+				a.HEADCOUNT,	
+				a.CURRENTLYUSERS,	
+				a.SUBMISSIONTIME,	
+				a.VOLUNTEERTEAM_ID
+		from 
+				TB_VOLUNTEERTEAM a
+		where 
+			 a.TEAMNAME like CONCAT('%','${value}','%' )
+	</select>
+	
+		<!-- 根据队伍id查询其参与活动 -->
+		<select id="ActivitiesSelectMapper" parameterType="pd" resultType="pd">
+		SELECT 
+				va.ACTIVITIESNAME,
+				va.ACTIVITIESTIME,
+				va.ACTIVITYPLANNER 
+		FROM
+				tb_activities a
+	    LEFT JOIN 
+				tb_volunteeractivities va 
+		on 
+				va.ACTIVITIESNAME=a.ACTIVITIESNAME
+	    LEFT JOIN
+	    	    tb_volunteerteam vt
+		on 
+				vt.TEAMNAME=a.TEAMNAME 
+		WHERE 
+			    vt.VOLUNTEERTEAM_ID = #{VOLUNTEERTEAM_ID}	
+		GROUP BY
+				 va.ACTIVITIESNAME
+	</select>
+	
+</mapper>
